@@ -12,7 +12,8 @@ public interface VehicleDAO {
 
 	public void delete(Vehicle v);
 
-	public List<Vehicle> vehicles = new ArrayList<>();
-	
-	public List<Vehicle> rVehicles = new ArrayList<>();
+	public List<Vehicle> getVehicles();
+	// public List<Vehicle> vehicles = new ArrayList<>();
+
+	// public List<Vehicle> rVehicles = new ArrayList<>();
 }

@@ -6,6 +6,7 @@ public class Person {
 	protected String address;
 	protected int phoneNo;
 	protected String email;
+	protected int isAdmin;
 
 	public String getEmail() {
 		return email;

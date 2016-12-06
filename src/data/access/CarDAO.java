@@ -13,6 +13,8 @@ public interface CarDAO {
 
 	public void update(Car car);
 
-	public List<Car> cars = new ArrayList<>();
-	public List<Car> rCars = new ArrayList<>();
+	public List<Car> getCars();
+	
+//	public List<Car> cars = new ArrayList<>();
+//	public List<Car> rCars = new ArrayList<>();
 }

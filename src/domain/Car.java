@@ -7,4 +7,12 @@ public class Car extends Vehicle {
 		return v.rented == 1;
 	}
 
+	private Car() {
+
+	}
+
+	public static Car getInstance() {
+		return new Car();
+	}
+
 }

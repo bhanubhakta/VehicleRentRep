@@ -20,7 +20,7 @@ public class CustomerDS implements CustomerDAO {
 		Connection connection = dc.getConnection();
 		Statement st = null;
 		String sql = String.format(
-				"INSERT INTO admin(firstName, LastName, Address, Phone) values ('%s', '%s', '%s', '%d', '%d', '%d');",
+				"INSERT INTO Users(firstName, LastName, Address, Phone) values ('%s', '%s', '%s', '%d', '%d', '%d');",
 				customer.getFirstName(), customer.getLastName(), customer.getAddress(), customer.getPhoneNo());
 		try {
 			st = connection.createStatement();

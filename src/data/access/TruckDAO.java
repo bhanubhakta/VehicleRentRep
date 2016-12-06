@@ -3,6 +3,7 @@ package data.access;
 import java.util.ArrayList;
 import java.util.List;
 
+import domain.Car;
 import domain.Truck;
 
 public interface TruckDAO {
@@ -13,6 +14,5 @@ public interface TruckDAO {
 
 	public void update(Truck car);
 
-	public List<Truck> cars = new ArrayList<>();
-	public List<Truck> rCars = new ArrayList<>();
+	public List<Truck> getTrucks();
 }

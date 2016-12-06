@@ -1,5 +1,5 @@
 package data.source;
 
-public class Vehicle {
+public class VehicleDS {
 
 }

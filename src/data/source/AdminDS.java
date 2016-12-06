@@ -15,8 +15,8 @@ public class AdminDS implements AdminDAO {
 		Connection connection = dc.getConnection();
 		Statement st = null;
 		String sql = String.format(
-				"INSERT INTO user(firstName, LastName, Address, Phone, email) values ('%s', '%s', '%s', '%d', '%s');",
-				admin.getFirstName(), admin.getLastName(), admin.getAddress(), admin.getPhoneNo(), admin.getEmail());
+				"INSERT INTO user(firstName, LastName, Address, Phone, email, isAdmin) values ('%s', '%s', '%s', '%d', '%s', '%d');",
+				admin.getFirstName(), admin.getLastName(), admin.getAddress(), admin.getPhoneNo(), admin.getEmail(), 1);
 		try {
 			st = connection.createStatement();
 

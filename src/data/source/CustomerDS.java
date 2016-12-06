@@ -20,8 +20,8 @@ public class CustomerDS implements CustomerDAO {
 		Connection connection = dc.getConnection();
 		Statement st = null;
 		String sql = String.format(
-				"INSERT INTO Users(firstName, LastName, Address, Phone) values ('%s', '%s', '%s', '%d', '%d', '%d');",
-				customer.getFirstName(), customer.getLastName(), customer.getAddress(), customer.getPhoneNo());
+				"INSERT INTO Users(firstName, LastName, Address, Phone, email, isAdmin) values ('%s', '%s', '%s', '%d', '%s', '%d');",
+				customer.getFirstName(), customer.getLastName(), customer.getAddress(), customer.getPhoneNo(), 0);
 		try {
 			st = connection.createStatement();
 			st.executeUpdate(sql);

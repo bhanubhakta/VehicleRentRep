@@ -20,8 +20,9 @@ public class CustomerDS implements CustomerDAO {
 		Connection connection = dc.getConnection();
 		Statement st = null;
 		String sql = String.format(
-				"INSERT INTO Users(firstName, LastName, Address, Phone, email, isAdmin) values ('%s', '%s', '%s', '%d', '%s', '%d');",
-				customer.getFirstName(), customer.getLastName(), customer.getAddress(), customer.getPhoneNo(), 0);
+				"INSERT INTO Users(firstName, LastName, Address, Phone, email, isAdmin, password) values ('%s', '%s', '%s', '%s', '%s', '%d', '%s');",
+				customer.getFirstName(), customer.getLastName(), customer.getAddress(), customer.getPhoneNo(),
+				customer.getEmail(), 0, customer.getPassword());
 		try {
 			st = connection.createStatement();
 			st.executeUpdate(sql);
@@ -70,7 +71,7 @@ public class CustomerDS implements CustomerDAO {
 				customer.setFirstName(rs.getString("firstName"));
 				customer.setLastName(rs.getString("lastName"));
 				customer.setAddress(rs.getString("address"));
-				customer.setPhoneNo(rs.getInt("phoneNo"));
+				customer.setPhoneNo(rs.getString("phoneNo"));
 				customer.setIsAdmin(rs.getInt("isAdmin"));
 				customers.add(customer);
 			}
@@ -86,6 +87,17 @@ public class CustomerDS implements CustomerDAO {
 
 	public List<Payment> getPayments(Customer customer) {
 		return customer.payments;
+	}
+
+	public static void main(String[] args) {
+		Customer customer = Customer.getInstance();
+		customer.setAddress("hhhklk");
+		customer.setEmail("dadaa");
+		customer.setPhoneNo("daa");
+		customer.setFirstName("dada");
+		customer.setLastName("dadad");
+		CustomerDS cds = new CustomerDS();
+		cds.create(customer);
 	}
 
 }

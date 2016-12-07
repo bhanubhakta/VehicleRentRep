@@ -36,7 +36,7 @@
  * and therefore, elected the GPL Version 2 license, then the option applies
  * only if the new code is made subject to such option by the copyright
  * holder.
- */ 
+ */
 
 package controller;
 
@@ -45,35 +45,38 @@ import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.PasswordField;
+import javafx.scene.control.TextField;
 
 /**
  * FXML Controller class
  *
  * @author Angie
  */
-public class CustomerDashboardController implements Initializable , ControlledScreen {
+public class CustomerDashboardController implements Initializable, ControlledScreen {
 
-    ScreensController myController;
-    /**
-     * Initializes the controller class.
-     */
-    @Override
-    public void initialize(URL url, ResourceBundle rb) {
-        // TODO
-    }
-    
-    public void setScreenParent(ScreensController screenParent){
-        myController = screenParent;
-    }
+	ScreensController myController;
+	/**
+	 * Initializes the controller class.
+	 */
 
-    @FXML
-    private void goToScreen1(ActionEvent event){
-       myController.setScreen(ScreensFramework.registrationScreenID);
-    }
-    
-    @FXML
-    private void logoutClick(ActionEvent event){
-    	System.out.println("logout");
-       myController.setScreen(ScreensFramework.welcomeScreenID);
-    }
+	@Override
+	public void initialize(URL url, ResourceBundle rb) {
+		// TODO
+	}
+
+	public void setScreenParent(ScreensController screenParent) {
+		myController = screenParent;
+	}
+
+	@FXML
+	private void goToScreen1(ActionEvent event) {
+		myController.setScreen(ScreensFramework.registrationScreenID);
+	}
+
+	@FXML
+	private void logoutClick(ActionEvent event) {
+		System.out.println("logout");
+		myController.setScreen(ScreensFramework.welcomeScreenID);
+	}
 }

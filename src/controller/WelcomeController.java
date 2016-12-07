@@ -37,14 +37,19 @@
  * and therefore, elected the GPL Version 2 license, then the option applies
  * only if the new code is made subject to such option by the copyright
  * holder.
- */ 
+ */
 package controller;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+
+import data.source.LoginDS;
+import domain.LoginManager;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.PasswordField;
+import javafx.scene.control.TextField;
 
 /**
  * FXML Controller class
@@ -53,28 +58,44 @@ import javafx.fxml.Initializable;
  */
 public class WelcomeController implements Initializable, ControlledScreen {
 
-    ScreensController myController;
-    
-    /**
-     * Initializes the controller class.
-     */
-    @Override
-    public void initialize(URL url, ResourceBundle rb) {
-        // TODO
-    }    
-    
-    public void setScreenParent(ScreensController screenParent){
-        myController = screenParent;
-    }
+	ScreensController myController;
 
-    @FXML
-    private void goToRegistration(ActionEvent event){
-       myController.setScreen(ScreensFramework.registrationScreenID);
-    }
-    
-    @FXML
-    private void goToDashboard(ActionEvent event){
-       myController.setScreen(ScreensFramework.customerDashboardID);
-    }
+	@FXML
+	private TextField usernameField, passwordField;
+
+	/**
+	 * Initializes the controller class.
+	 */
+	@Override
+	public void initialize(URL url, ResourceBundle rb) {
+		// TODO
+	}
+
+	public void setScreenParent(ScreensController screenParent) {
+		myController = screenParent;
+	}
+
+	@FXML
+	private void goToRegistration(ActionEvent event) {
+		myController.setScreen(ScreensFramework.registrationScreenID);
+	}
+
+	@FXML
+	private void goToDashboard(ActionEvent event) {
+		String username = usernameField.getText();
+		String password = passwordField.getText();
+		LoginManager lManager = LoginManager.getInstance();
+		lManager.setUserName(username);
+		lManager.setPassword(password);
+		LoginDS lds = new LoginDS();
+		if (lds.isValidUser(lManager)) {
+			if (lds.isAdmin(lManager)) {
+
+			} else {
+				myController.setScreen(ScreensFramework.customerDashboardID);
+			}
+		} else {
+			myController.setScreen(ScreensFramework.welcomeScreenID);
+		}
+	}
 }
-

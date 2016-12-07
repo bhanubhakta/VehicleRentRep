@@ -4,9 +4,18 @@ public class Person {
 	protected String firstName;
 	protected String lastName;
 	protected String address;
-	protected int phoneNo;
+	protected String phoneNo;
 	protected String email;
 	protected int isAdmin;
+	protected String password;
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
 
 	public int getIsAdmin() {
 		return isAdmin;
@@ -44,7 +53,7 @@ public class Person {
 		return address;
 	}
 
-	public int getPhoneNo() {
+	public String getPhoneNo() {
 		return phoneNo;
 	}
 
@@ -52,7 +61,7 @@ public class Person {
 		this.address = address;
 	}
 
-	public void setPhoneNo(int phoneNo) {
+	public void setPhoneNo(String phoneNo) {
 		this.phoneNo = phoneNo;
 	}
 }

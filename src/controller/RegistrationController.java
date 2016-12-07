@@ -36,14 +36,20 @@
  * and therefore, elected the GPL Version 2 license, then the option applies
  * only if the new code is made subject to such option by the copyright
  * holder.
- */ 
+ */
 
 package controller;
+
 import java.net.URL;
 import java.util.ResourceBundle;
+
+import data.access.CustomerDAO;
+import data.source.CustomerDS;
+import domain.Customer;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 
 /**
@@ -53,50 +59,60 @@ import javafx.scene.control.TextField;
  */
 public class RegistrationController implements Initializable, ControlledScreen {
 
-    ScreensController myController;
-    /**
-     * Initializes the controller class.
-     */
-    
-    @FXML private TextField firstNameText,lastNameText,phoneNumberText,addressText, emailText;
-    
-    @Override
-    public void initialize(URL url, ResourceBundle rb) {
-        // TODO
-    }
-    
-    public void setScreenParent(ScreensController screenParent){
-        myController = screenParent;
-    }
+	ScreensController myController;
+	/**
+	 * Initializes the controller class.
+	 */
 
-    @FXML
-    private void goToScreen2(ActionEvent event){
-       myController.setScreen(ScreensFramework.customerDashboardID);
-    }   
-    
-    
-    @FXML
-    private void registerBtnEventHandler(ActionEvent event){
-    	if(firstNameText.getText().isEmpty() 
-        		|| lastNameText.getText().isEmpty() 
-        		|| phoneNumberText.getText().isEmpty() 
-        		|| addressText.getText().isEmpty()
-       		    || emailText.getText().isEmpty()){
-       	
-       	 //to do alert
-  		System.out.println("ohmbhrim");
-   				
-       	
-       }
-       else{
-        	
-       	 myController.setScreen(ScreensFramework.customerDashboardID);
-       } 
-    }
-    
-    @FXML
-    private void onCancel(ActionEvent event){
-       myController.setScreen(ScreensFramework.welcomeScreenID);
-    }   
-    
+	@FXML
+	private TextField firstNameText, lastNameText, phoneNumberText, addressText, emailText, passwordText;
+//	private PasswordField passwordText;
+
+	@Override
+	public void initialize(URL url, ResourceBundle rb) {
+		// TODO
+	}
+
+	public void setScreenParent(ScreensController screenParent) {
+		myController = screenParent;
+	}
+
+	@FXML
+	private void goToScreen2(ActionEvent event) {
+		myController.setScreen(ScreensFramework.customerDashboardID);
+	}
+
+	@FXML
+	private void registerBtnEventHandler(ActionEvent event) {
+		String firstName = firstNameText.getText();
+		String lastName = lastNameText.getText();
+		String phoneNo = phoneNumberText.getText();
+		String address = addressText.getText();
+		String email = emailText.getText();
+		String password = passwordText.getText();
+		if (firstNameText.getText().isEmpty() || lastNameText.getText().isEmpty() || phoneNumberText.getText().isEmpty()
+				|| addressText.getText().isEmpty() || emailText.getText().isEmpty() || passwordText.getText().isEmpty()) {
+
+			// to do alert
+			System.out.println("ohmbhrim");
+
+		} else {
+			Customer customer = Customer.getInstance();
+			customer.setAddress(address);
+			customer.setEmail(email);
+			customer.setPhoneNo(phoneNo);
+			customer.setFirstName(firstName);
+			customer.setLastName(lastName);
+			customer.setPassword(password);
+			CustomerDS cds = new CustomerDS();
+			cds.create(customer);
+			myController.setScreen(ScreensFramework.customerDashboardID);
+		}
+	}
+
+	@FXML
+	private void onCancel(ActionEvent event) {
+		myController.setScreen(ScreensFramework.welcomeScreenID);
+	}
+
 }

@@ -59,6 +59,8 @@ public class ScreensFramework extends Application {
     public static String welcomeScreenFile = "../view/WelcomeScreen.fxml";
     public static String passwordScreenID = "CreatePassword";
     public static String passwordScreenFile = "../view/PasswordScreen.fxml";
+    public static String adminDashboardID = "AdminDashboard";
+    public static String adminDashboardFile = "../view/AdminDashboardScreen.fxml";
     
     
     @Override
@@ -69,6 +71,7 @@ public class ScreensFramework extends Application {
         mainContainer.loadScreen(ScreensFramework.customerDashboardID, ScreensFramework.customerDashboardFile);
         mainContainer.loadScreen(ScreensFramework.welcomeScreenID, ScreensFramework.welcomeScreenFile);
         mainContainer.loadScreen(ScreensFramework.passwordScreenID, ScreensFramework.passwordScreenFile);
+        mainContainer.loadScreen(ScreensFramework.adminDashboardID, ScreensFramework.adminDashboardFile);
         
         mainContainer.setScreen(ScreensFramework.welcomeScreenID);
         

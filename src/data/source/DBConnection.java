@@ -8,9 +8,9 @@ import java.sql.Statement;
 
 public class DBConnection {
 	public static Connection DBConnection;
-	private String url = "jdbc:mysql://localhost:3306/vehicle_rent";
-	private String user = "root";
-	private String password = "";
+	private static String url = "jdbc:mysql://localhost:3306/vehicle_rent";
+	private static String user = "root";
+	private static String password = "";
 
 	public void setUrl(String url) {
 		this.url = url;
@@ -24,10 +24,10 @@ public class DBConnection {
 		this.password = password;
 	}
 
-	public Connection getConnection() {
+	public static Connection getConnection() {
 		try {
 			loadDriver();
-			this.DBConnection = DriverManager.getConnection(url, user, password);
+			DBConnection = DriverManager.getConnection(url, user, password);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

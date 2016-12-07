@@ -8,6 +8,14 @@ public class Person {
 	protected String email;
 	protected int isAdmin;
 
+	public int getIsAdmin() {
+		return isAdmin;
+	}
+
+	public void setIsAdmin(int isAdmin) {
+		this.isAdmin = isAdmin;
+	}
+
 	public String getEmail() {
 		return email;
 	}

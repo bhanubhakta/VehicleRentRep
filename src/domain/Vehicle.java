@@ -8,6 +8,7 @@ public abstract class Vehicle {
 	protected int make;
 	protected int number;
 	protected String color;
+	protected int status;
 
 	public int getRented() {
 		return rented;

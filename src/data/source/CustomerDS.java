@@ -71,6 +71,7 @@ public class CustomerDS implements CustomerDAO {
 				customer.setLastName(rs.getString("lastName"));
 				customer.setAddress(rs.getString("address"));
 				customer.setPhoneNo(rs.getInt("phoneNo"));
+				customer.setIsAdmin(rs.getInt("isAdmin"));
 				customers.add(customer);
 			}
 		} catch (Exception e) {

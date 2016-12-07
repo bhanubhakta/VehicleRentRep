@@ -27,4 +27,8 @@ public class Payment {
 		}
 		return totSum;
 	}
+
+	public void addOrder(Order order) {
+		this.orders.add(order);
+	}
 }

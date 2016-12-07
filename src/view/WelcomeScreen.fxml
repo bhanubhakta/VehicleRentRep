@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="700.0" prefWidth="800.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="controller.WelcomeController">
+  <!-- TODO Add Nodes -->
+  <children>
+    <Label layoutX="108.0" layoutY="142.0" minHeight="27.0" prefHeight="58.0" prefWidth="418.0" text="Vehicle Hiring System" textAlignment="CENTER">
+      <font>
+        <Font size="25.0" />
+      </font>
+    </Label>
+    <Button layoutX="349.0" layoutY="471.0" mnemonicParsing="false" onAction="#goToRegistration" text="Register" />
+    <Button layoutX="366.0" layoutY="337.0" mnemonicParsing="false" onAction="#goToDashboard" text="Login" />
+    <Label layoutX="116.0" layoutY="245.0" text="User Name" />
+    <TextField layoutX="224.0" layoutY="235.0" prefWidth="205.0" />
+    <Label layoutX="153.0" layoutY="436.0" text="If you don't have an account, register here" />
+    <Label layoutX="118.0" layoutY="295.0" text="Password" />
+    <TextField layoutX="224.0" layoutY="289.0" prefWidth="205.0" />
+  </children>
+</AnchorPane>

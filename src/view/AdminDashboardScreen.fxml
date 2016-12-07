@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="700.0" prefWidth="800.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="controller.AdminDashboardController">
+  <!-- TODO Add Nodes -->
+  <children>
+    <MenuBar layoutX="14.0" layoutY="18.0" prefWidth="772.0">
+      <menus>
+        <Menu id="vehiclesMenuItem" mnemonicParsing="false" text="Vehicles">
+          <items>
+            <MenuItem mnemonicParsing="false" onAction="#onClickTruck" text="Truck" fx:id="truckMenu" />
+            <MenuItem id="busSubmenuItem" mnemonicParsing="false" onAction="#onClickBus" text="Bus" fx:id="busMenu" />
+            <MenuItem id="carSubMenu" mnemonicParsing="false" onAction="#onClickCar" text="Car" fx:id="carMenu" />
+            <MenuItem mnemonicParsing="false" text="Unspecified Action" />
+          </items>
+        </Menu>
+        <Menu id="customersMenuItem" mnemonicParsing="false" text="Customers">
+          <items>
+            <MenuItem id="viewCustomerSubmenu" mnemonicParsing="false" onAction="#onClickViewCustomers" text="View Customers" />
+          </items>
+        </Menu>
+        <Menu id="logoutMenuItem" mnemonicParsing="false" text="Logout">
+          <items>
+            <MenuItem mnemonicParsing="false" text="About" />
+          </items>
+        </Menu>
+      </menus>
+    </MenuBar>
+    <ListView fx:id="vehicleList" layoutX="14.0" layoutY="48.0" prefHeight="638.0" prefWidth="772.0" />
+  </children>
+</AnchorPane>

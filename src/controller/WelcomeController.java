@@ -90,7 +90,7 @@ public class WelcomeController implements Initializable, ControlledScreen {
 		LoginDS lds = new LoginDS();
 		if (lds.isValidUser(lManager)) {
 			if (lds.isAdmin(lManager)) {
-
+				myController.setScreen(ScreensFramework.adminDashboardID);
 			} else {
 				myController.setScreen(ScreensFramework.customerDashboardID);
 			}

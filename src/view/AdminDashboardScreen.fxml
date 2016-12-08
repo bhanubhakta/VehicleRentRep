@@ -6,30 +6,58 @@
 <?import javafx.scene.layout.AnchorPane?>
 
 <AnchorPane prefHeight="700.0" prefWidth="800.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="controller.AdminDashboardController">
-  <!-- TODO Add Nodes -->
   <children>
-    <MenuBar layoutX="14.0" layoutY="18.0" prefWidth="772.0">
-      <menus>
-        <Menu id="vehiclesMenuItem" mnemonicParsing="false" text="Vehicles">
-          <items>
-            <MenuItem mnemonicParsing="false" onAction="#onClickTruck" text="Truck" fx:id="truckMenu" />
-            <MenuItem id="busSubmenuItem" mnemonicParsing="false" onAction="#onClickBus" text="Bus" fx:id="busMenu" />
-            <MenuItem id="carSubMenu" mnemonicParsing="false" onAction="#onClickCar" text="Car" fx:id="carMenu" />
-            <MenuItem mnemonicParsing="false" text="Unspecified Action" />
-          </items>
-        </Menu>
-        <Menu id="customersMenuItem" mnemonicParsing="false" text="Customers">
-          <items>
-            <MenuItem id="viewCustomerSubmenu" mnemonicParsing="false" onAction="#onClickViewCustomers" text="View Customers" />
-          </items>
-        </Menu>
-        <Menu id="logoutMenuItem" mnemonicParsing="false" text="Logout">
-          <items>
-            <MenuItem mnemonicParsing="false" text="About" />
-          </items>
-        </Menu>
-      </menus>
-    </MenuBar>
-    <ListView fx:id="vehicleList" layoutX="14.0" layoutY="48.0" prefHeight="638.0" prefWidth="772.0" />
+    <TabPane layoutX="67.0" layoutY="38.0" prefHeight="554.0" prefWidth="615.0" tabClosingPolicy="UNAVAILABLE">
+      <tabs>
+        <Tab text="Veicle">
+          <content>
+            <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+              <children>
+                <Button layoutX="22.0" layoutY="26.0" mnemonicParsing="false" onAction="#OnAddVehicleBtn" text="Add Vehicle" />
+                <Pane fx:id="AddVehiclePane" layoutX="28.0" layoutY="68.0" prefHeight="431.0" prefWidth="573.0" visible="false">
+                  <children>
+                    <GridPane layoutX="29.0" layoutY="38.0" prefHeight="249.0" prefWidth="508.0">
+                      <children>
+                        <Label text="Make" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+                        <Label text="Model" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+                        <Label text="Number" GridPane.columnIndex="0" GridPane.rowIndex="2" />
+                        <Label text="Color" GridPane.columnIndex="0" GridPane.rowIndex="3" />
+                        <Label text="Rent Price" GridPane.columnIndex="0" GridPane.rowIndex="4" />
+                        <TextField fx:id="makeText" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+                        <TextField fx:id="modelText" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                        <TextField fx:id="numberText" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                        <TextField fx:id="colorText" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                        <TextField fx:id="rentPriceText" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                        <Label text="Insurance Price" GridPane.columnIndex="0" GridPane.rowIndex="5" />
+                        <TextField fx:id="insuranceText" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                      </children>
+                      <columnConstraints>
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                      </columnConstraints>
+                      <rowConstraints>
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                      </rowConstraints>
+                    </GridPane>
+                    <Button layoutX="370.0" layoutY="319.0" mnemonicParsing="false" onAction="#OnAddVehicleClick" text="Add" />
+                    <Button layoutX="467.0" layoutY="319.0" mnemonicParsing="false" onAction="#OnCancelVehicleClick" text="Cancel" />
+                  </children>
+                </Pane>
+              </children>
+            </AnchorPane>
+          </content>
+        </Tab>
+        <Tab text="Untitled Tab 2">
+          <content>
+            <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+          </content>
+        </Tab>
+      </tabs>
+    </TabPane>
   </children>
 </AnchorPane>

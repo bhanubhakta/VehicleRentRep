@@ -15,4 +15,8 @@ public class Truck extends Vehicle {
 	public static Truck getInstance() {
 		return new Truck();
 	}
+	
+	public double getInsurancePrice(){
+		return insurance.getPrice();
+	}
 }

@@ -17,8 +17,8 @@ public class VehicleDS implements VehicleDAO{
 		Connection connection = dc.getConnection();
 		Statement st = null;
 		String sql = String.format(
-				"INSERT INTO vehicle(make, modelNo, regNo, color, rented, price) values ('%d', '%d', '%d', '%s', '%d', '%d');",
-				v.getMake(), v.getModelNo(), v.getNumber(), v.getColor(), v.getRented(), v.getRentPrice());
+				"INSERT INTO vehicle(regNo, make, modelNo, color, rented, rentPrice, type, status) values ('%d', '%d', '%d', '%s', '%d', '%d', '%s', '%d');",
+				v.getNumber(), v.getMake(), v.getModelNo(), v.getColor(), v.getRented(), v.getRentPrice(), v.getType(), v.getStatus());
 		try {
 			st = connection.createStatement();
 			st.executeUpdate(sql);

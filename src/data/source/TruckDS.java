@@ -58,7 +58,7 @@ public class TruckDS implements TruckDAO {
 		DBConnection.loadDriver();
 		Connection connection = dc.getConnection();
 		Statement st = null;
-		String sql = String.format("select * from vechicle");
+		String sql = String.format("select * from vehicle where type = '%s'", "Truck");
 		try {
 			st = connection.createStatement();
 			ResultSet rs = st.executeQuery(sql);
@@ -67,10 +67,11 @@ public class TruckDS implements TruckDAO {
 				truck.setColor(rs.getString("color"));
 				truck.setMake(rs.getInt("make"));
 				truck.setModelNo(rs.getInt("modelNo"));
-				truck.setNumber(rs.getInt("number"));
+				truck.setNumber(rs.getInt("regNo"));
 				truck.setRented(rs.getInt("rented"));
 				truck.setRentPrice(rs.getInt("rentPrice"));
 				trucks.add(truck);
+				
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

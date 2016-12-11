@@ -14,5 +14,9 @@ public class Car extends Vehicle {
 	public static Car getInstance() {
 		return new Car();
 	}
+	
+	public double getInsurancePrice(){
+		return insurance.getPrice();
+	}
 
 }

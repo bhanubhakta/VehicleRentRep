@@ -20,9 +20,9 @@ public class CarDS implements CarDAO {
 		Connection connection = dc.getConnection();
 		Statement st = null;
 		String sql = String.format(
-				"INSERT INTO vehicle(rentPrice, rented, modelNo, make, number, color, type) values ('%d', '%d', '%d', '%d', '%d', '%s', '%s');",
-				car.getRentPrice(), car.getRented(), car.getModelNo(), car.getMake(), car.getNumber(), car.getColor(),
-				"car");
+				
+				"INSERT INTO vehicle(regNo, make, modelNo, color, rented, rentPrice, type) values ('%d', '%d', '%d', '%s', '%d', '%d', '%s');",
+				car.getNumber(), car.getMake(),car.getModelNo(), car.getColor(), car.getRented(), car.getRentPrice(), car.getRented(), car.getClass().getSimpleName(),"car");
 		try {
 			st = connection.createStatement();
 			st.executeUpdate(sql);
@@ -59,7 +59,9 @@ public class CarDS implements CarDAO {
 		DBConnection.loadDriver();
 		Connection connection = dc.getConnection();
 		Statement st = null;
-		String sql = String.format("select * from vehicle");
+//		String sql = String.format("select * from vehicle inner join insurance on vehicle.regNo = insurance.vehicleRegNo where type = '%s'", "Car");
+		String sql = String.format("select * from vehicle where type = '%s'", "Car");
+
 		try {
 			st = connection.createStatement();
 			ResultSet rs = st.executeQuery(sql);
@@ -68,9 +70,11 @@ public class CarDS implements CarDAO {
 				car.setColor(rs.getString("color"));
 				car.setMake(rs.getInt("make"));
 				car.setModelNo(rs.getInt("modelNo"));
-				car.setNumber(rs.getInt("number"));
+				car.setNumber(rs.getInt("regNo"));
 				car.setRented(rs.getInt("rented"));
 				car.setRentPrice(rs.getInt("rentPrice"));
+				//car.setInsurance(new Insurance(rs.getInt("price")));
+				//car.setInsurancePrice(rs.getInt("price"));
 				cars.add(car);
 			}
 		} catch (Exception e) {

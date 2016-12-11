@@ -50,22 +50,36 @@
 
 <AnchorPane id="AnchorPane" prefHeight="700.0" prefWidth="800.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="controller.CustomerDashboardController">
   <children>
-    <MenuBar layoutX="7.0" layoutY="7.0" prefWidth="786.0">
-      <menus>
-        <Menu id="vehicleTypeMenu" mnemonicParsing="false" text="Vehicle Type" fx:id="vehicleTypeMenu">
-          <items>
-            <MenuItem id="CarMenuItem" mnemonicParsing="false" text="Car" />
-            <MenuItem id="TruckMenuItem" mnemonicParsing="false" text="Truck" />
-            <MenuItem id="BikeMenuItem" mnemonicParsing="false" text="Bike" />
-          </items>
-        </Menu>
-        <Menu mnemonicParsing="false" text="Account">
-          <items>
-            <MenuItem mnemonicParsing="false" onAction="#logoutClick" text="Logout" />
-          </items>
-        </Menu>
-      </menus>
-    </MenuBar>
-    <ListView id="vehicleList" layoutX="7.0" layoutY="37.0" prefHeight="647.0" prefWidth="786.0" />
+    <TabPane layoutX="14.0" layoutY="24.0" prefHeight="662.0" prefWidth="772.0" tabClosingPolicy="UNAVAILABLE">
+      <tabs>
+        <Tab text="Vehicles">
+          <content>
+            <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+              <children>
+                <Pane layoutX="14.0" layoutY="14.0" prefHeight="592.9999000000025" prefWidth="743.9999000000025">
+                  <children>
+                    <TableView id="VehicleListTable" layoutX="22.0" layoutY="14.0" prefHeight="553.0" prefWidth="585.0">
+                      <columns>
+                        <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="156.0" text="Registration Number" fx:id="regNoCol" />
+                        <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="156.0" text="Make" fx:id="makeCol" />
+                        <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="95.0" resizable="true" text="Model Number" fx:id="modelNoCol" />
+                        <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="156.0" text="Color" fx:id="colorCol" />
+                        <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="95.0" resizable="true" text="Rented" fx:id="rentedCol" />
+                        <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="156.0" text="Rent Price" fx:id="rentPriceCol" />
+                      </columns>
+                    </TableView>
+                  </children>
+                </Pane>
+              </children>
+            </AnchorPane>
+          </content>
+        </Tab>
+        <Tab text="Account">
+          <content>
+            <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+          </content>
+        </Tab>
+      </tabs>
+    </TabPane>
   </children>
 </AnchorPane>

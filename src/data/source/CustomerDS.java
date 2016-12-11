@@ -61,18 +61,18 @@ public class CustomerDS implements CustomerDAO {
 		DBConnection.loadDriver();
 		Connection connection = dc.getConnection();
 		Statement st = null;
-		String sql = String.format("select * from Customer");
+		String sql = String.format("select * from users");
 		try {
 			st = connection.createStatement();
 			ResultSet rs = st.executeQuery(sql);
 			while (rs.next()) {
 				Customer customer = Customer.getInstance();
 				customer.setEmail(rs.getString("email"));
-				customer.setFirstName(rs.getString("firstName"));
-				customer.setLastName(rs.getString("lastName"));
-				customer.setAddress(rs.getString("address"));
-				customer.setPhoneNo(rs.getString("phoneNo"));
-				customer.setIsAdmin(rs.getInt("isAdmin"));
+				customer.setFirstName(rs.getString("FirstName"));
+				customer.setLastName(rs.getString("LastName"));
+				customer.setAddress(rs.getString("Address"));
+				customer.setPhoneNo(rs.getString("Phone"));
+				//customer.setIsAdmin(rs.getInt("password"));
 				customers.add(customer);
 			}
 		} catch (Exception e) {

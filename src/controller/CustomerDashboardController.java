@@ -42,10 +42,16 @@ package controller;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+
+import domain.Car;
+import domain.Truck;
+import domain.Vehicle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.PasswordField;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 
 /**
@@ -56,9 +62,12 @@ import javafx.scene.control.TextField;
 public class CustomerDashboardController implements Initializable, ControlledScreen {
 
 	ScreensController myController;
-	/**
-	 * Initializes the controller class.
-	 */
+
+	@FXML
+	private TableView<Vehicle> VehicleListTable;
+
+	@FXML
+	private TableColumn<Car, String> regNoCol, makeCol, modelNoCol, colorCol, rentedCol, rentPriceCol;
 
 	@Override
 	public void initialize(URL url, ResourceBundle rb) {

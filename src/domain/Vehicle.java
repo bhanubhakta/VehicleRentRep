@@ -1,7 +1,7 @@
 package domain;
 
 public abstract class Vehicle {
-	private Insurance insurance;
+	protected Insurance insurance;
 	private int rentPrice;
 	protected int rented;
 	protected int modelNo;
@@ -9,7 +9,9 @@ public abstract class Vehicle {
 	protected int number;
 	protected String color;
 	protected int status;
-
+	protected String type;
+	//protected double insurancePrice;
+	
 	public int getRented() {
 		return rented;
 	}
@@ -24,6 +26,22 @@ public abstract class Vehicle {
 
 	public int getNumber() {
 		return number;
+	}
+
+	public int getStatus() {
+		return status;
+	}
+
+	public void setStatus(int status) {
+		this.status = status;
+	}
+
+	public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
 	}
 
 	public String getColor() {
@@ -63,8 +81,15 @@ public abstract class Vehicle {
 	public Insurance getInsurance() {
 		return insurance;
 	}
+	
+	//public abstract double getInsurancePrice();
 
 	public int getRentPrice() {
 		return rentPrice;
 	}
+	
+
+//	public void setInsurancePrice(double price) {
+//		insurancePrice = price;
+//	}
 }

@@ -258,13 +258,32 @@
                     <Button layoutX="453.0" layoutY="464.0" mnemonicParsing="false" onAction="#OnCancelOrder" text="Cancel Order" />
                   </children>
                 </Pane>
+                <Label fx:id="ScreenMessageLabel" layoutX="39.0" layoutY="227.0" text="" />
+                <Pane id="PaymentPane" fx:id="PaymentConfirmPane" layoutX="14.0" layoutY="56.0" prefHeight="591.0" prefWidth="744.0" visible="false">
+                  <children>
+                    <Label layoutX="31.0" layoutY="71.0" prefHeight="38.951171875" prefWidth="250.0" text="Make Payment for Vehicle Number : " />
+                    <Label fx:id="vehicleNumberLabelPaymentPane" layoutX="308.0" layoutY="73.0" text="" />
+                    <Label layoutX="31.0" layoutY="142.0" text="Amount : " />
+                    <Label fx:id="AmountLabelPaymentPane" layoutX="121.0" layoutY="146.0" text="" />
+                    <Button layoutX="31.0" layoutY="318.0" mnemonicParsing="false" onAction="#OnMakePaymentBtnClick" text="Make Payment" />
+                    <Button layoutX="195.0" layoutY="318.0" mnemonicParsing="false" onAction="#OnCancelPaymentBtnClick" text="Cancel Order" />
+                    <Label layoutX="31.0" layoutY="194.0" text="Order Id :" />
+                    <Label fx:id="orderNumberLabelPaymentPane" layoutX="121.0" layoutY="194.0" text="" />
+                    <Label layoutX="29.0" layoutY="246.0" text="Account Number :" />
+                    <TextField fx:id="accountNumberText" layoutX="181.0" layoutY="240.0" prefWidth="200.0" />
+                  </children>
+                </Pane>
               </children>
             </AnchorPane>
           </content>
         </Tab>
         <Tab text="Account">
           <content>
-            <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+            <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+              <children>
+                <Hyperlink layoutX="672.0" layoutY="32.0" onAction="#OnLogOutClick" text="Log Out" />
+              </children>
+            </AnchorPane>
           </content>
         </Tab>
       </tabs>

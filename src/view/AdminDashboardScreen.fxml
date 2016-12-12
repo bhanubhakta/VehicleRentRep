@@ -14,7 +14,11 @@
           <content>
             <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
               <children>
-                <Pane id="VehicleTabPane" layoutX="0.0" layoutY="61.0" prefHeight="577.0" prefWidth="772.0" style="-fx-border-width: 2px;" />
+                <Pane id="VehicleTabPane" layoutX="0.0" layoutY="61.0" prefHeight="577.0" prefWidth="772.0" style="-fx-border-width: 2px;">
+                  <children>
+                    <Label fx:id="ScreenMsgLabel" layoutX="90.0" layoutY="160.0" text="" />
+                  </children>
+                </Pane>
                 <Button layoutX="639.0" layoutY="19.0" mnemonicParsing="false" onAction="#OnAddVehicleBtn" text="Add Vehicle" />
                 <Pane fx:id="AddVehiclePane" layoutX="15.0" layoutY="68.0" prefHeight="557.0" prefWidth="743.0" visible="false">
                   <children>
@@ -40,7 +44,6 @@
                             </FXCollections>
                           </items>
                         </ComboBox>
-                        
                         <Label text="Vehicle Type" GridPane.columnIndex="0" GridPane.rowIndex="6" />
                       </children>
                       <columnConstraints>
@@ -115,6 +118,15 @@
                     <Button layoutX="0.0" layoutY="7.0" mnemonicParsing="false" onAction="#OnViewCustomerBtnClicked" text="View Customers" />
                   </children>
                 </Pane>
+              </children>
+            </AnchorPane>
+          </content>
+        </Tab>
+        <Tab text="Account">
+          <content>
+            <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+              <children>
+                <Hyperlink layoutX="645.0" layoutY="48.0" onAction="#OnLogOutClick" text="Log Out" />
               </children>
             </AnchorPane>
           </content>

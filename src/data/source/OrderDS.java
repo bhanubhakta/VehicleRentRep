@@ -11,7 +11,7 @@ import domain.Vehicle;
 public class OrderDS implements OrderDAO {
 
 	@Override
-	public void create(String customerUserName, Order order, Integer vehicle) {
+	public int create(String customerUserName, Order order, Integer vehicle) {
 		System.out.println(vehicle);
 		System.out.println(customerUserName);
 		DBConnection dc = new DBConnection();
@@ -23,18 +23,20 @@ public class OrderDS implements OrderDAO {
 				customerUserName, order.getStartDate(), order.getEndDate(), order.getStatus(), vehicle);
 		
 		String sqlVehicleStatusUpdate = String.format(
-				"UPDATE Vehicle SET status = '%d' where regNo = '%d'",
-				order.getStatus(), vehicle);
-		
+				"UPDATE Vehicle SET status = '%d' where regNo = '%d'", order.getStatus(), vehicle);
+		int orderID =0;
 	
 		try {
 			st = connection.createStatement();
-			st.executeUpdate(sql);
+			orderID = st.executeUpdate(sql);
 			st.executeUpdate(sqlVehicleStatusUpdate);
-			 System.out.println("ohhhmBhrimSankateMamaRogamNashayaSwaha!!!!!!!!");
+			 System.out.println("order Created!!");
 		} catch (Exception e) {
 			e.printStackTrace();
+			return 0;
 		}
+		
+		return orderID;
 	}
 
 }

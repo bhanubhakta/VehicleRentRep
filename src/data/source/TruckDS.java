@@ -78,5 +78,33 @@ public class TruckDS implements TruckDAO {
 		}
 		return trucks;
 	}
+	
+	@Override
+	public List<Truck> getTrucksForCustomer() {
+		List<Truck> trucks = new ArrayList<>();
+		DBConnection dc = new DBConnection();
+		DBConnection.loadDriver();
+		Connection connection = dc.getConnection();
+		Statement st = null;
+		String sql = String.format("select * from vehicle where type = '%s' AND status = 0", "Truck");
+		try {
+			st = connection.createStatement();
+			ResultSet rs = st.executeQuery(sql);
+			while (rs.next()) {
+				Truck truck = Truck.getInstance();
+				truck.setColor(rs.getString("color"));
+				truck.setMake(rs.getInt("make"));
+				truck.setModelNo(rs.getInt("modelNo"));
+				truck.setNumber(rs.getInt("regNo"));
+				truck.setRented(rs.getInt("rented"));
+				truck.setRentPrice(rs.getInt("rentPrice"));
+				trucks.add(truck);
+				
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return trucks;
+	}
 
 }

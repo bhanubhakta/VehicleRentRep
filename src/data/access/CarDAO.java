@@ -15,6 +15,8 @@ public interface CarDAO {
 
 	public List<Car> getCars();
 	
+	public List<Car> getCarsForCustomer();
+	
 //	public List<Car> cars = new ArrayList<>();
 //	public List<Car> rCars = new ArrayList<>();
 }

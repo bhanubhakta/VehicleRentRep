@@ -15,4 +15,6 @@ public interface TruckDAO {
 	public void update(Truck car);
 
 	public List<Truck> getTrucks();
+	
+	public List<Truck> getTrucksForCustomer();
 }

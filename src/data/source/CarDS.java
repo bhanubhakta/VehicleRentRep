@@ -82,5 +82,36 @@ public class CarDS implements CarDAO {
 		}
 		return cars;
 	}
+	
+	@Override
+	public List<Car> getCarsForCustomer() {
+		List<Car> cars = new ArrayList<>();
+		DBConnection dc = new DBConnection();
+		DBConnection.loadDriver();
+		Connection connection = dc.getConnection();
+		Statement st = null;
+//		String sql = String.format("select * from vehicle inner join insurance on vehicle.regNo = insurance.vehicleRegNo where type = '%s'", "Car");
+		String sql = String.format("select * from vehicle where type = '%s' AND status = 0", "Car");
+
+		try {
+			st = connection.createStatement();
+			ResultSet rs = st.executeQuery(sql);
+			while (rs.next()) {
+				Car car = Car.getInstance();
+				car.setColor(rs.getString("color"));
+				car.setMake(rs.getInt("make"));
+				car.setModelNo(rs.getInt("modelNo"));
+				car.setNumber(rs.getInt("regNo"));
+				car.setRented(rs.getInt("rented"));
+				car.setRentPrice(rs.getInt("rentPrice"));
+				//car.setInsurance(new Insurance(rs.getInt("price")));
+				//car.setInsurancePrice(rs.getInt("price"));
+				cars.add(car);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return cars;
+	}
 
 }

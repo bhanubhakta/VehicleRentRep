@@ -52,10 +52,12 @@ import java.util.concurrent.TimeUnit;
 
 import data.access.CarDAO;
 import data.access.OrderDAO;
+import data.access.PaymentDAO;
 import data.access.TruckDAO;
 import data.access.VehicleDAO;
 import data.source.CarDS;
 import data.source.OrderDS;
+import data.source.PaymentDS;
 import data.source.TruckDS;
 import data.source.VehicleDS;
 import domain.Car;
@@ -80,11 +82,13 @@ public class CustomerDashboardController implements Initializable, ControlledScr
 
 	ScreensController myController;
 	CarDAO car;
-	OrderDAO order;
 	TruckDAO truck;
+	OrderDAO order;
+	PaymentDAO payment;
+	Integer orderOperationClass = 0;
 	
 	@FXML
-	private Pane TruckPane, CarPane, VehicleAnchorPane, OrderPane;
+	private Pane TruckPane, CarPane, VehicleAnchorPane, OrderPane, PaymentConfirmPane;
 	
 	@FXML
 	private TableView<Vehicle> TruckListTable;
@@ -103,10 +107,14 @@ public class CustomerDashboardController implements Initializable, ControlledScr
 	private Button OrderBtn, OrderCarBtn, OrderTruckBtn, ConfirmOrderBtn;
 	
 	@FXML
-	private Label labelMake, labelModel, labelRegNumber, labelColor, LabelPricePerHour, TotalPricelabel;
+	private Label labelMake, labelModel, labelRegNumber, labelColor, LabelPricePerHour, TotalPricelabel, ScreenMessageLabel, vehicleNumberLabelPaymentPane, AmountLabelPaymentPane, orderNumberLabelPaymentPane;
 	
 	@FXML
 	private ComboBox<String> dayFromCmb, monthFromCmb, yearFromCmb, dayToCmb, monthToCmb, yearToCmb;
+	
+	@FXML
+	private TextField accountNumberText; 
+	
 	
 	@Override
 	public void initialize(URL url, ResourceBundle rb) {
@@ -131,14 +139,14 @@ public class CustomerDashboardController implements Initializable, ControlledScr
 	
 	@FXML
 	private void OnViewTruckBtn(ActionEvent event) {
-		
+		ScreenMessageLabel.setText("");
 		CarPane.setVisible(false);
 		OrderPane.setVisible(false);
 		OrderCarBtn.setVisible(false);
 		OrderTruckBtn.setVisible(true);
 		List<Truck> listVehicles = new ArrayList<>();
 		truck = new TruckDS();
-		listVehicles = truck.getTrucks();
+		listVehicles = truck.getTrucksForCustomer();
 		
 		if(listVehicles.size()>0){
 			TruckPane.setVisible(true);			
@@ -155,14 +163,14 @@ public class CustomerDashboardController implements Initializable, ControlledScr
 	
 	@FXML
 	private void OnViewCarBtn(ActionEvent event) {
-		
+		ScreenMessageLabel.setText("");
 		TruckPane.setVisible(false);
 		OrderPane.setVisible(false);
 		OrderCarBtn.setVisible(true);
 		OrderTruckBtn.setVisible(false);		
 		List<Car> listVehicles = new ArrayList<>();
 		car = new CarDS();
-		listVehicles = car.getCars();
+		listVehicles = car.getCarsForCustomer();
 		
 		if(listVehicles.size()>0){			
 			CarPane.setVisible(true);
@@ -189,6 +197,9 @@ public class CustomerDashboardController implements Initializable, ControlledScr
 	
 	@FXML
 	private void OnCarOrderClick(ActionEvent event) {
+		orderOperationClass = 1;
+		ScreenMessageLabel.setText("");
+		TotalPricelabel.setText("0");
 		CarPane.setVisible(false);
 		TruckPane.setVisible(false);
 		OrderPane.setVisible(true);
@@ -202,6 +213,9 @@ public class CustomerDashboardController implements Initializable, ControlledScr
 	
 	@FXML
 	private void OnTruckOrderClick(ActionEvent event) {
+		orderOperationClass = 2;
+		ScreenMessageLabel.setText("");
+		TotalPricelabel.setText("0");
 		TruckPane.setVisible(false);
 		CarPane.setVisible(false);
 		OrderPane.setVisible(true);
@@ -243,9 +257,6 @@ public class CustomerDashboardController implements Initializable, ControlledScr
 		String to = dayToCmb.getValue() + " " + monthToCmb.getValue() + " " + yearToCmb.getValue();
 		String from = dayFromCmb.getValue() + " " + monthFromCmb.getValue() + " " + yearFromCmb.getValue();
 		
-		
-//		String inputString1 = "23 01 1997";
-//		String inputString2 = "27 01 1997";
 		SimpleDateFormat myFormat = new SimpleDateFormat("dd MM yyyy");
 		 Date date1 = new Date();
 		 Date date2 = new Date();
@@ -268,9 +279,27 @@ public class CustomerDashboardController implements Initializable, ControlledScr
 		o.setStatus(1);
 		
 		List<String> customerData = new ArrayList<String>();
-		customerData = myController.getDataListReceived();		
-
-		order.create(customerData.get(0),o , CarListTable.getSelectionModel().getSelectedItem().getNumber());
+		customerData = myController.getDataListReceived();	
+		int orderID =0;
+		if(orderOperationClass == 1)
+			orderID = order.create(customerData.get(0), o , CarListTable.getSelectionModel().getSelectedItem().getNumber());
+		
+		if(orderOperationClass == 2)
+			orderID = order.create(customerData.get(0), o , TruckListTable.getSelectionModel().getSelectedItem().getNumber());
+		
+		if( orderID > 0){
+			
+			OrderPane.setVisible(false);
+			PaymentConfirmPane.setVisible(true);
+			vehicleNumberLabelPaymentPane.setText(labelRegNumber.getText());
+			orderNumberLabelPaymentPane.setText(String.valueOf(orderID));
+			AmountLabelPaymentPane.setText(TotalPricelabel.getText());
+		}
+		
+		else{			
+			ScreenMessageLabel.setText("Order Failed!!!");
+			OrderPane.setVisible(false);					
+		}		
 		
 	}
 	
@@ -279,5 +308,27 @@ public class CustomerDashboardController implements Initializable, ControlledScr
 	private void OnCancelOrder(ActionEvent event){
 		OrderPane.setVisible(false);
 	}
+	
+	@FXML
+	private void OnMakePaymentBtnClick(ActionEvent event){
+		
+		payment = new PaymentDS();		
+		payment.create(Integer.parseInt(orderNumberLabelPaymentPane.getText()), Integer.parseInt(AmountLabelPaymentPane.getText()), Integer.parseInt(vehicleNumberLabelPaymentPane.getText()), Integer.parseInt(accountNumberText.getText()));
+		PaymentConfirmPane.setVisible(false);
+		ScreenMessageLabel.setText("Payment Made!! Please visit our store with your ID.");
+	}
+	
+	@FXML
+	private void OnCancelPaymentBtnClick(ActionEvent event){
+		PaymentConfirmPane.setVisible(false);
+	}
+	
+	@FXML
+	private void OnLogOutClick(ActionEvent event){
+		myController.setScreen(ScreensFramework.welcomeScreenID);
+	}
+	
+	
+	
 	
 }

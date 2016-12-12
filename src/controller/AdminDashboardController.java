@@ -31,6 +31,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -78,6 +79,9 @@ public class AdminDashboardController implements Initializable, ControlledScreen
 
 	@FXML
 	private ComboBox<String> vehicleTypeCmb;
+	
+	@FXML
+	private Label ScreenMsgLabel;
 
 	@FXML
 	private void logoutClick(ActionEvent event) {
@@ -90,6 +94,7 @@ public class AdminDashboardController implements Initializable, ControlledScreen
 		AddVehiclePane.setVisible(true);
 		CarListPane.setVisible(false);
 		TruckListPane.setVisible(false);
+		ScreenMsgLabel.setText("");
 
 	}
 
@@ -114,6 +119,7 @@ public class AdminDashboardController implements Initializable, ControlledScreen
 		vehicle.create(v);
 		insuranceDAO.create(insurance, v.getNumber());
 		AddVehiclePane.setVisible(false);
+		ScreenMsgLabel.setText("Vehicle has been added!!");
 
 	}
 
@@ -126,6 +132,7 @@ public class AdminDashboardController implements Initializable, ControlledScreen
 
 	@FXML
 	private void OnViewTruckListClick(ActionEvent event) {
+		ScreenMsgLabel.setText("");
 		CarListPane.setVisible(false);
 		TruckListPane.setVisible(true);
 		regNoColTruck.setCellValueFactory(new PropertyValueFactory<Truck, String>("number"));
@@ -144,7 +151,7 @@ public class AdminDashboardController implements Initializable, ControlledScreen
 
 	@FXML
 	private void OnViewCarListClick(ActionEvent event) {
-
+		ScreenMsgLabel.setText("");
 		TruckListPane.setVisible(false);
 		CarListPane.setVisible(true);
 		regNoColCar.setCellValueFactory(new PropertyValueFactory<Car, String>("number"));
@@ -172,7 +179,7 @@ public class AdminDashboardController implements Initializable, ControlledScreen
 
 	@FXML
 	private void OnViewCustomerBtnClicked(ActionEvent event) {
-
+		ScreenMsgLabel.setText("");
 		CustomerListTable.setVisible(true);
 		List<Customer> customerList = new ArrayList<>();
 		customer = new CustomerDS();
@@ -184,6 +191,13 @@ public class AdminDashboardController implements Initializable, ControlledScreen
 		emailCol.setCellValueFactory(new PropertyValueFactory<Customer, String>("email"));
 		CustomerListTable.setItems(FXCollections.observableArrayList(customerList));
 
+	}
+	
+	@FXML
+	private void OnLogOutClick(ActionEvent event){
+		ScreenMsgLabel.setText("");
+		myController.setScreen(ScreensFramework.welcomeScreenID);
+		
 	}
 
 }

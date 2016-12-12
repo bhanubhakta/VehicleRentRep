@@ -41,6 +41,8 @@
 package controller;
 
 import java.util.HashMap;
+import java.util.List;
+
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
@@ -61,12 +63,21 @@ public class ScreensController  extends StackPane {
     //Holds the screens to be displayed
 
     private HashMap<String, Node> screens = new HashMap<>();
+    private List<String> dataListReceived;
     
     public ScreensController() {
         super();
     }
 
-    //Add the screen to the collection
+    public List<String> getDataListReceived() {
+		return dataListReceived;
+	}
+
+	public void setDataListreceived(List<String> data) {
+		this.dataListReceived = data;
+	}
+
+	//Add the screen to the collection
     public void addScreen(String name, Node screen) {
         screens.put(name, screen);
     }

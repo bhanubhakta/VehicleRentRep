@@ -41,6 +41,8 @@
 package controller;
 
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 
 import data.source.LoginDS;
@@ -92,6 +94,9 @@ public class WelcomeController implements Initializable, ControlledScreen {
 			if (lds.isAdmin(lManager)) {
 				myController.setScreen(ScreensFramework.adminDashboardID);
 			} else {
+				List<String> dataToSend = new ArrayList<>();
+				dataToSend.add(username);
+				myController.setDataListreceived(dataToSend);
 				myController.setScreen(ScreensFramework.customerDashboardID);
 			}
 		} else {

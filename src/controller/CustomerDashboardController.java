@@ -41,17 +41,25 @@
 package controller;
 
 import java.net.URL;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.concurrent.TimeUnit;
 
 import data.access.CarDAO;
+import data.access.OrderDAO;
 import data.access.TruckDAO;
 import data.access.VehicleDAO;
 import data.source.CarDS;
+import data.source.OrderDS;
 import data.source.TruckDS;
 import data.source.VehicleDS;
 import domain.Car;
+import domain.Order;
 import domain.Truck;
 import domain.Vehicle;
 import javafx.collections.FXCollections;
@@ -59,6 +67,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TableColumn;
@@ -71,6 +80,7 @@ public class CustomerDashboardController implements Initializable, ControlledScr
 
 	ScreensController myController;
 	CarDAO car;
+	OrderDAO order;
 	TruckDAO truck;
 	
 	@FXML
@@ -93,7 +103,10 @@ public class CustomerDashboardController implements Initializable, ControlledScr
 	private Button OrderBtn;
 	
 	@FXML
-	private Label labelMake, labelModel, labelRegNumber, labelColor, LabelPricePerHour;
+	private Label labelMake, labelModel, labelRegNumber, labelColor, LabelPricePerHour, TotalPricelabel;
+	
+	@FXML
+	private ComboBox<String> dayFromCmb, monthFromCmb, yearFromCmb, dayToCmb, monthToCmb, yearToCmb;
 	
 	@Override
 	public void initialize(URL url, ResourceBundle rb) {
@@ -177,6 +190,57 @@ public class CustomerDashboardController implements Initializable, ControlledScr
 		LabelPricePerHour.setText(String.valueOf(CarListTable.getSelectionModel().getSelectedItem().getRentPrice()));
 		
 	}
+	
+	@FXML
+	private void OnShowPriceBtnClick(ActionEvent event) throws ParseException {
+	
+		TotalPricelabel.setText("100");
+	}
+	
+	@FXML
+	private void OnConfirmOrderClick(ActionEvent event) throws ParseException {
+		
+		String to = dayToCmb.getValue() + " " + monthToCmb.getValue() + " " + yearToCmb.getValue();
+		String from = dayFromCmb.getValue() + " " + monthFromCmb.getValue() + " " + yearFromCmb.getValue();
+		
+		SimpleDateFormat myFormat = new SimpleDateFormat("dd MM yyyy");
+//		String inputString1 = "23 01 1997";
+//		String inputString2 = "27 01 1997";
+		 Date date1 = new Date();
+		 Date date2 = new Date();
+
+		try {
+		    date1 = myFormat.parse(from);
+		    date2 = myFormat.parse(to); 
+		    int diffInDays = (int) ((date2.getTime() - date1.getTime()) / (1000 * 60 * 60 * 24));
+		    System.out.println(diffInDays);
+		} catch (ParseException e) {
+		    e.printStackTrace();
+		}
+	
+		order = new OrderDS();
+		
+		Order o = new Order();
+		long d1 = date1.getTime();
+		long d2 = date2.getTime();
+		o.setStartDate(d1);
+		o.setEndDate(d2);
+		o.setStatus(1);
+		
+		List<String> customerData = new ArrayList<String>();
+		customerData = myController.getDataListReceived();		
+		//System.out.println(customerData.get(0));
+		
+		
+		
+		
+		order.create(customerData.get(0),o , CarListTable.getSelectionModel().getSelectedItem().getNumber());
+		
+	}
+	
+	
+	
+	
 
 	
 	

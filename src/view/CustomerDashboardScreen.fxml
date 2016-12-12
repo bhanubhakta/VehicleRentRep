@@ -55,9 +55,10 @@
       <tabs>
         <Tab id="vehicleTab" text="Vehicles">
           <content>
-            <AnchorPane fx:id="VehicleAnchorPane" minHeight="0.0" minWidth="0.0" prefHeight="721.0" prefWidth="772.0">
+            <AnchorPane fx:id="VehicleAnchorPane" minHeight="0.0" minWidth="0.0" prefHeight="593.0" prefWidth="772.0">
               <children>
-                <Button layoutX="233.0" layoutY="19.0" mnemonicParsing="false" onAction="#OnOrderClick" text="Order" />
+                <Button fx:id="OrderCarBtn" layoutX="233.0" layoutY="19.0" mnemonicParsing="false" onAction="#OnCarOrderClick" text="Order Car" visible="false" />
+                <Button fx:id="OrderTruckBtn" layoutX="233.0" layoutY="19.0" mnemonicParsing="false" onAction="#OnTruckOrderClick" text="Order Truck" visible="false" />
                 <Button layoutX="122.0" layoutY="19.0" mnemonicParsing="false" onAction="#OnViewTruckBtn" text="View Truck" />
                 <Button layoutX="14.0" layoutY="19.0" mnemonicParsing="false" onAction="#OnViewCarBtn" text="View Car" />
                 <Pane fx:id="TruckPane" layoutX="14.0" layoutY="74.0" prefHeight="557.0" prefWidth="744.0" visible="false">
@@ -88,9 +89,9 @@
                     </TableView>
                   </children>
                 </Pane>
-                <Pane fx:id="OrderPane" layoutX="12.0" layoutY="61.0" prefHeight="654.0" prefWidth="744.0" visible="false">
+                <Pane fx:id="OrderPane" layoutX="12.0" layoutY="61.0" prefHeight="530.0000999999975" prefWidth="744.0" visible="false">
                   <children>
-                    <GridPane layoutX="62.0" layoutY="52.0" prefHeight="261.0" prefWidth="633.0" visible="true">
+                    <GridPane layoutX="32.0" layoutY="14.0" prefHeight="196.0" prefWidth="637.0" visible="true">
                       <children>
                         <Label text="Make" GridPane.columnIndex="0" GridPane.rowIndex="0" />
                         <Label text="Model" GridPane.columnIndex="0" GridPane.rowIndex="1" />
@@ -116,12 +117,12 @@
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                       </rowConstraints>
                     </GridPane>
-                    <Label layoutX="55.0" layoutY="539.0" prefWidth="218.0" text="Total Price " />
-                    <Label fx:id="TotalPricelabel" layoutX="179.0" layoutY="535.0" prefWidth="218.0" text="..." />
-                    <Button id="showPriceBtn" layoutX="570.0" layoutY="468.0" mnemonicParsing="false" onAction="#OnShowPriceBtnClick" text="Show Price" />
-                    <Label layoutX="63.0" layoutY="355.0" text="From" />
-                    <Label layoutX="62.0" layoutY="413.0" text="To" />
-                    <ComboBox fx:id="dayFromCmb" layoutX="364.0" layoutY="355.0">
+                    <Label layoutX="17.0" layoutY="366.0" prefWidth="218.0" text="Total Price " />
+                    <Label fx:id="TotalPricelabel" layoutX="242.0" layoutY="362.0" prefWidth="218.0" text="..." />
+                    <Button id="showPriceBtn" layoutX="506.0" layoutY="320.0" mnemonicParsing="false" onAction="#OnShowPriceBtnClick" text="Show Price" />
+                    <Label layoutX="32.0" layoutY="229.0" text="From" />
+                    <Label layoutX="32.0" layoutY="279.0" text="To" />
+                    <ComboBox fx:id="dayFromCmb" layoutX="351.0" layoutY="229.0">
                       <items>
                         <FXCollections fx:factory="observableArrayList">
                           <String fx:value="1" />
@@ -159,7 +160,7 @@
                         </FXCollections>
                       </items>
                     </ComboBox>
-                    <ComboBox fx:id="monthFromCmb" layoutX="473.0" layoutY="355.0">
+                    <ComboBox fx:id="monthFromCmb" layoutX="446.0" layoutY="229.0">
                       <items>
                         <FXCollections fx:factory="observableArrayList">
                           <String fx:value="01" />
@@ -177,7 +178,7 @@
                         </FXCollections>
                       </items>
                     </ComboBox>
-                    <ComboBox fx:id="yearFromCmb" layoutX="589.0" layoutY="356.0">
+                    <ComboBox fx:id="yearFromCmb" layoutX="535.0" layoutY="229.0">
                       <items>
                         <FXCollections fx:factory="observableArrayList">
                           <String fx:value="2016" />
@@ -185,7 +186,7 @@
                         </FXCollections>
                       </items>
                     </ComboBox>
-                    <ComboBox fx:id="dayToCmb" layoutX="364.0" layoutY="414.0">
+                    <ComboBox fx:id="dayToCmb" layoutX="351.0" layoutY="279.0">
                       <items>
                         <FXCollections fx:factory="observableArrayList">
                           <String fx:value="1" />
@@ -223,7 +224,7 @@
                         </FXCollections>
                       </items>
                     </ComboBox>
-                    <ComboBox fx:id="monthToCmb" layoutX="473.0" layoutY="414.0">
+                    <ComboBox fx:id="monthToCmb" layoutX="446.0" layoutY="279.0">
                       <items>
                         <FXCollections fx:factory="observableArrayList">
                           <String fx:value="01" />
@@ -241,7 +242,7 @@
                         </FXCollections>
                       </items>
                     </ComboBox>
-                    <ComboBox fx:id="yearToCmb" layoutX="589.0" layoutY="414.0">
+                    <ComboBox fx:id="yearToCmb" layoutX="535.0" layoutY="279.0">
                       <items>
                         <FXCollections fx:factory="observableArrayList">
                           <String fx:value="2016" />
@@ -249,6 +250,7 @@
                         </FXCollections>
                       </items>
                     </ComboBox>
+                    <Button layoutX="18.0" layoutY="480.0" mnemonicParsing="false" onAction="#OnConfirmOrderClick" text="Confirm Order" />
                   </children>
                 </Pane>
               </children>
@@ -262,6 +264,5 @@
         </Tab>
       </tabs>
     </TabPane>
-    <Button layoutX="78.0" layoutY="719.0" mnemonicParsing="false" onAction="#OnConfirmOrderClick" text="Confirm Order" />
   </children>
 </AnchorPane>

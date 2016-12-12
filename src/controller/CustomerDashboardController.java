@@ -100,7 +100,7 @@ public class CustomerDashboardController implements Initializable, ControlledScr
 			rentPriceColTruck;
 
 	@FXML
-	private Button OrderBtn;
+	private Button OrderBtn, OrderCarBtn, OrderTruckBtn;
 	
 	@FXML
 	private Label labelMake, labelModel, labelRegNumber, labelColor, LabelPricePerHour, TotalPricelabel;
@@ -131,7 +131,10 @@ public class CustomerDashboardController implements Initializable, ControlledScr
 	
 	@FXML
 	private void OnViewTruckBtn(ActionEvent event) {
+		
 		CarPane.setVisible(false);
+		OrderCarBtn.setVisible(false);
+		OrderTruckBtn.setVisible(true);
 		List<Truck> listVehicles = new ArrayList<>();
 		truck = new TruckDS();
 		listVehicles = truck.getTrucks();
@@ -151,7 +154,10 @@ public class CustomerDashboardController implements Initializable, ControlledScr
 	
 	@FXML
 	private void OnViewCarBtn(ActionEvent event) {
+		
 		TruckPane.setVisible(false);
+		OrderCarBtn.setVisible(true);
+		OrderTruckBtn.setVisible(false);		
 		List<Car> listVehicles = new ArrayList<>();
 		car = new CarDS();
 		listVehicles = car.getCars();
@@ -180,8 +186,9 @@ public class CustomerDashboardController implements Initializable, ControlledScr
 	}
 	
 	@FXML
-	private void OnOrderClick(ActionEvent event) {
+	private void OnCarOrderClick(ActionEvent event) {
 		CarPane.setVisible(false);
+		TruckPane.setVisible(false);
 		OrderPane.setVisible(true);
 		labelMake.setText(String.valueOf(CarListTable.getSelectionModel().getSelectedItem().getMake()));
 		labelModel.setText(String.valueOf(CarListTable.getSelectionModel().getSelectedItem().getModelNo()));
@@ -192,10 +199,39 @@ public class CustomerDashboardController implements Initializable, ControlledScr
 	}
 	
 	@FXML
-	private void OnShowPriceBtnClick(ActionEvent event) throws ParseException {
-	
-		TotalPricelabel.setText("100");
+	private void OnTruckOrderClick(ActionEvent event) {
+		TruckPane.setVisible(false);
+		CarPane.setVisible(false);
+		OrderPane.setVisible(true);
+		labelMake.setText(String.valueOf(TruckListTable.getSelectionModel().getSelectedItem().getMake()));
+		labelModel.setText(String.valueOf(TruckListTable.getSelectionModel().getSelectedItem().getModelNo()));
+		labelRegNumber.setText(String.valueOf(TruckListTable.getSelectionModel().getSelectedItem().getNumber()));
+		labelColor.setText(String.valueOf(TruckListTable.getSelectionModel().getSelectedItem().getColor()));
+		LabelPricePerHour.setText(String.valueOf(TruckListTable.getSelectionModel().getSelectedItem().getRentPrice()));
+		
 	}
+	
+	
+	@FXML
+	private void OnShowPriceBtnClick(ActionEvent event) throws ParseException {
+		String to = dayToCmb.getValue() + " " + monthToCmb.getValue() + " " + yearToCmb.getValue();
+		String from = dayFromCmb.getValue() + " " + monthFromCmb.getValue() + " " + yearFromCmb.getValue();
+		SimpleDateFormat myFormat = new SimpleDateFormat("dd MM yyyy");
+		Date date1 = new Date();
+		Date date2 = new Date();
+		int diffInDays = 0;
+		try {
+		    date1 = myFormat.parse(from);
+		    date2 = myFormat.parse(to); 
+		    diffInDays = (int) ((date2.getTime() - date1.getTime()) / (1000 * 60 * 60 * 24));
+		    System.out.println(diffInDays);
+		} catch (ParseException e) {
+		    e.printStackTrace();
+		}		
+		
+		TotalPricelabel.setText(String.valueOf(diffInDays * Integer.parseInt(LabelPricePerHour.getText())));
+	}
+	
 	
 	@FXML
 	private void OnConfirmOrderClick(ActionEvent event) throws ParseException {
@@ -203,17 +239,17 @@ public class CustomerDashboardController implements Initializable, ControlledScr
 		String to = dayToCmb.getValue() + " " + monthToCmb.getValue() + " " + yearToCmb.getValue();
 		String from = dayFromCmb.getValue() + " " + monthFromCmb.getValue() + " " + yearFromCmb.getValue();
 		
-		SimpleDateFormat myFormat = new SimpleDateFormat("dd MM yyyy");
+		
 //		String inputString1 = "23 01 1997";
 //		String inputString2 = "27 01 1997";
+		SimpleDateFormat myFormat = new SimpleDateFormat("dd MM yyyy");
 		 Date date1 = new Date();
 		 Date date2 = new Date();
 
 		try {
 		    date1 = myFormat.parse(from);
 		    date2 = myFormat.parse(to); 
-		    int diffInDays = (int) ((date2.getTime() - date1.getTime()) / (1000 * 60 * 60 * 24));
-		    System.out.println(diffInDays);
+		    
 		} catch (ParseException e) {
 		    e.printStackTrace();
 		}
@@ -229,25 +265,9 @@ public class CustomerDashboardController implements Initializable, ControlledScr
 		
 		List<String> customerData = new ArrayList<String>();
 		customerData = myController.getDataListReceived();		
-		//System.out.println(customerData.get(0));
-		
-		
-		
-		
+
 		order.create(customerData.get(0),o , CarListTable.getSelectionModel().getSelectedItem().getNumber());
 		
 	}
-	
-	
-	
-	
-
-	
-	
-	
-	
-	
-	
-	
 	
 }

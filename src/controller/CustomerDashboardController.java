@@ -41,34 +41,60 @@
 package controller;
 
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 
+import data.access.CarDAO;
+import data.access.TruckDAO;
+import data.access.VehicleDAO;
+import data.source.CarDS;
+import data.source.TruckDS;
+import data.source.VehicleDS;
 import domain.Car;
 import domain.Truck;
 import domain.Vehicle;
+import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.Pane;
 
-/**
- * FXML Controller class
- *
- * @author Angie
- */
 public class CustomerDashboardController implements Initializable, ControlledScreen {
 
 	ScreensController myController;
+	CarDAO car;
+	TruckDAO truck;
+	
+	@FXML
+	private Pane TruckPane, CarPane, VehicleAnchorPane, OrderPane;
+	
+	@FXML
+	private TableView<Vehicle> TruckListTable;
+	
+	@FXML
+	private TableView<Vehicle> CarListTable;
 
 	@FXML
-	private TableView<Vehicle> VehicleListTable;
+	private TableColumn<Car, String> regNoColCar, makeColCar, modelNoColCar, colorColCar, rentedColCar, rentPriceColCar, insuranceAmountColCar;
 
 	@FXML
-	private TableColumn<Car, String> regNoCol, makeCol, modelNoCol, colorCol, rentedCol, rentPriceCol;
+	private TableColumn<Truck, String> regNoColTruck, makeColTruck, modelNoColTruck, colorColTruck, rentedColTruck, insuranceAmountColTruck,
+			rentPriceColTruck;
 
+	@FXML
+	private Button OrderBtn;
+	
+	@FXML
+	private Label labelMake, labelModel, labelRegNumber, labelColor, LabelPricePerHour;
+	
 	@Override
 	public void initialize(URL url, ResourceBundle rb) {
 		// TODO
@@ -88,4 +114,76 @@ public class CustomerDashboardController implements Initializable, ControlledScr
 		System.out.println("logout");
 		myController.setScreen(ScreensFramework.welcomeScreenID);
 	}
+	
+	
+	@FXML
+	private void OnViewTruckBtn(ActionEvent event) {
+		CarPane.setVisible(false);
+		List<Truck> listVehicles = new ArrayList<>();
+		truck = new TruckDS();
+		listVehicles = truck.getTrucks();
+		
+		if(listVehicles.size()>0){
+			TruckPane.setVisible(true);			
+			regNoColTruck.setCellValueFactory(new PropertyValueFactory<Truck, String>("number"));
+			makeColTruck.setCellValueFactory(new PropertyValueFactory<Truck, String>("make"));
+			modelNoColTruck.setCellValueFactory(new PropertyValueFactory<Truck, String>("modelNo"));
+			colorColTruck.setCellValueFactory(new PropertyValueFactory<Truck, String>("color"));
+			rentPriceColTruck.setCellValueFactory(new PropertyValueFactory<Truck, String>("rentPrice"));
+			rentedColTruck.setCellValueFactory(new PropertyValueFactory<Truck, String>("rented"));
+			TruckListTable.setItems(FXCollections.observableArrayList(listVehicles));
+		}
+		
+	}
+	
+	@FXML
+	private void OnViewCarBtn(ActionEvent event) {
+		TruckPane.setVisible(false);
+		List<Car> listVehicles = new ArrayList<>();
+		car = new CarDS();
+		listVehicles = car.getCars();
+		
+		if(listVehicles.size()>0){			
+			CarPane.setVisible(true);
+			regNoColCar.setCellValueFactory(new PropertyValueFactory<Car, String>("number"));
+			makeColCar.setCellValueFactory(new PropertyValueFactory<Car, String>("make"));
+			modelNoColCar.setCellValueFactory(new PropertyValueFactory<Car, String>("modelNo"));
+			colorColCar.setCellValueFactory(new PropertyValueFactory<Car, String>("color"));
+			rentPriceColCar.setCellValueFactory(new PropertyValueFactory<Car, String>("rentPrice"));
+			rentedColCar.setCellValueFactory(new PropertyValueFactory<Car, String>("rented"));
+//			insuranceAmountColCar.setCellValueFactory(new PropertyValueFactory<Car, String>("insurancePrice"));
+
+			CarListTable.setItems(FXCollections.observableArrayList(listVehicles));
+			
+		}
+		
+//		CarListTable.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
+//		    if (newSelection != null) {
+//		    	OrderBtn.setDisable(false);
+//		    	System.out.println(CarListTable.getSelectionModel().getSelectedItem().getNumber());
+//		    }
+//		});	
+		
+	}
+	
+	@FXML
+	private void OnOrderClick(ActionEvent event) {
+		CarPane.setVisible(false);
+		OrderPane.setVisible(true);
+		labelMake.setText(String.valueOf(CarListTable.getSelectionModel().getSelectedItem().getMake()));
+		labelModel.setText(String.valueOf(CarListTable.getSelectionModel().getSelectedItem().getModelNo()));
+		labelRegNumber.setText(String.valueOf(CarListTable.getSelectionModel().getSelectedItem().getNumber()));
+		labelColor.setText(String.valueOf(CarListTable.getSelectionModel().getSelectedItem().getColor()));
+		LabelPricePerHour.setText(String.valueOf(CarListTable.getSelectionModel().getSelectedItem().getRentPrice()));
+		
+	}
+
+	
+	
+	
+	
+	
+	
+	
+	
 }

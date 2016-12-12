@@ -12,6 +12,7 @@ public abstract class Vehicle {
 	protected String type;
 	//protected double insurancePrice;
 	
+		
 	public int getRented() {
 		return rented;
 	}

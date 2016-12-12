@@ -100,7 +100,7 @@ public class CustomerDashboardController implements Initializable, ControlledScr
 			rentPriceColTruck;
 
 	@FXML
-	private Button OrderBtn, OrderCarBtn, OrderTruckBtn;
+	private Button OrderBtn, OrderCarBtn, OrderTruckBtn, ConfirmOrderBtn;
 	
 	@FXML
 	private Label labelMake, labelModel, labelRegNumber, labelColor, LabelPricePerHour, TotalPricelabel;
@@ -133,6 +133,7 @@ public class CustomerDashboardController implements Initializable, ControlledScr
 	private void OnViewTruckBtn(ActionEvent event) {
 		
 		CarPane.setVisible(false);
+		OrderPane.setVisible(false);
 		OrderCarBtn.setVisible(false);
 		OrderTruckBtn.setVisible(true);
 		List<Truck> listVehicles = new ArrayList<>();
@@ -156,6 +157,7 @@ public class CustomerDashboardController implements Initializable, ControlledScr
 	private void OnViewCarBtn(ActionEvent event) {
 		
 		TruckPane.setVisible(false);
+		OrderPane.setVisible(false);
 		OrderCarBtn.setVisible(true);
 		OrderTruckBtn.setVisible(false);		
 		List<Car> listVehicles = new ArrayList<>();
@@ -230,6 +232,8 @@ public class CustomerDashboardController implements Initializable, ControlledScr
 		}		
 		
 		TotalPricelabel.setText(String.valueOf(diffInDays * Integer.parseInt(LabelPricePerHour.getText())));
+		if(Integer.parseInt(TotalPricelabel.getText()) > 0)
+			ConfirmOrderBtn.setVisible(true);
 	}
 	
 	
@@ -268,6 +272,12 @@ public class CustomerDashboardController implements Initializable, ControlledScr
 
 		order.create(customerData.get(0),o , CarListTable.getSelectionModel().getSelectedItem().getNumber());
 		
+	}
+	
+	
+	@FXML
+	private void OnCancelOrder(ActionEvent event){
+		OrderPane.setVisible(false);
 	}
 	
 }

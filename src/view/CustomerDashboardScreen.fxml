@@ -57,9 +57,9 @@
           <content>
             <AnchorPane fx:id="VehicleAnchorPane" minHeight="0.0" minWidth="0.0" prefHeight="593.0" prefWidth="772.0">
               <children>
-                <Button fx:id="OrderCarBtn" layoutX="233.0" layoutY="19.0" mnemonicParsing="false" onAction="#OnCarOrderClick" text="Order Car" visible="false" />
-                <Button fx:id="OrderTruckBtn" layoutX="233.0" layoutY="19.0" mnemonicParsing="false" onAction="#OnTruckOrderClick" text="Order Truck" visible="false" />
-                <Button layoutX="122.0" layoutY="19.0" mnemonicParsing="false" onAction="#OnViewTruckBtn" text="View Truck" />
+                <Button fx:id="OrderCarBtn" layoutX="220.0" layoutY="19.0" mnemonicParsing="false" onAction="#OnCarOrderClick" text="Order Car" visible="false" />
+                <Button fx:id="OrderTruckBtn" layoutX="221.0" layoutY="19.0" mnemonicParsing="false" onAction="#OnTruckOrderClick" text="Order Truck" visible="false" />
+                <Button layoutX="108.0" layoutY="19.0" mnemonicParsing="false" onAction="#OnViewTruckBtn" text="View Truck" />
                 <Button layoutX="14.0" layoutY="19.0" mnemonicParsing="false" onAction="#OnViewCarBtn" text="View Car" />
                 <Pane fx:id="TruckPane" layoutX="14.0" layoutY="74.0" prefHeight="557.0" prefWidth="744.0" visible="false">
                   <children>
@@ -89,7 +89,7 @@
                     </TableView>
                   </children>
                 </Pane>
-                <Pane fx:id="OrderPane" layoutX="12.0" layoutY="61.0" prefHeight="530.0000999999975" prefWidth="744.0" visible="false">
+                <Pane fx:id="OrderPane" layoutX="9.0" layoutY="50.0" prefHeight="530.0000999999975" prefWidth="744.0" visible="false">
                   <children>
                     <GridPane layoutX="32.0" layoutY="14.0" prefHeight="196.0" prefWidth="637.0" visible="true">
                       <children>
@@ -98,7 +98,7 @@
                         <Label text="Registration Number" GridPane.columnIndex="0" GridPane.rowIndex="2" />
                         <Label text="Color" GridPane.columnIndex="0" GridPane.rowIndex="3" />
                         <Label text="" GridPane.columnIndex="0" GridPane.rowIndex="4" />
-                        <Label text="Price per hour" GridPane.columnIndex="0" GridPane.rowIndex="4" />
+                        <Label text="Price per day" GridPane.columnIndex="0" GridPane.rowIndex="4" />
                         <Label fx:id="labelMake" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="0" />
                         <Label fx:id="labelModel" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                         <Label fx:id="labelRegNumber" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="2" />
@@ -106,8 +106,8 @@
                         <Label fx:id="LabelPricePerHour" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="4" />
                       </children>
                       <columnConstraints>
-                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="318.0" minWidth="10.0" prefWidth="239.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="442.0" minWidth="10.0" prefWidth="398.0" />
                       </columnConstraints>
                       <rowConstraints>
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
@@ -117,12 +117,16 @@
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                       </rowConstraints>
                     </GridPane>
-                    <Label layoutX="17.0" layoutY="366.0" prefWidth="218.0" text="Total Price " />
-                    <Label fx:id="TotalPricelabel" layoutX="242.0" layoutY="362.0" prefWidth="218.0" text="..." />
-                    <Button id="showPriceBtn" layoutX="506.0" layoutY="320.0" mnemonicParsing="false" onAction="#OnShowPriceBtnClick" text="Show Price" />
-                    <Label layoutX="32.0" layoutY="229.0" text="From" />
-                    <Label layoutX="32.0" layoutY="279.0" text="To" />
-                    <ComboBox fx:id="dayFromCmb" layoutX="351.0" layoutY="229.0">
+                    <Label layoutX="271.0" layoutY="347.0" prefWidth="218.0" text="Total Price (in $) " />
+                    <Label fx:id="TotalPricelabel" layoutX="413.0" layoutY="347.0" prefWidth="218.0" text="...">
+                      <font>
+                        <Font name="System Bold" size="16.0" />
+                      </font>
+                    </Label>
+                    <Button id="showPriceBtn" layoutX="32.0" layoutY="340.0" mnemonicParsing="false" onAction="#OnShowPriceBtnClick" text="Show Price" />
+                    <Label layoutX="32.0" layoutY="232.0" text="Hire Start Date" />
+                    <Label layoutX="32.0" layoutY="285.0" prefWidth="113.0" text="Hire End Date" />
+                    <ComboBox fx:id="dayFromCmb" layoutX="271.0" layoutY="229.0">
                       <items>
                         <FXCollections fx:factory="observableArrayList">
                           <String fx:value="1" />
@@ -160,7 +164,7 @@
                         </FXCollections>
                       </items>
                     </ComboBox>
-                    <ComboBox fx:id="monthFromCmb" layoutX="446.0" layoutY="229.0">
+                    <ComboBox fx:id="monthFromCmb" layoutX="359.0" layoutY="229.0">
                       <items>
                         <FXCollections fx:factory="observableArrayList">
                           <String fx:value="01" />
@@ -178,7 +182,7 @@
                         </FXCollections>
                       </items>
                     </ComboBox>
-                    <ComboBox fx:id="yearFromCmb" layoutX="535.0" layoutY="229.0">
+                    <ComboBox fx:id="yearFromCmb" layoutX="446.0" layoutY="229.0">
                       <items>
                         <FXCollections fx:factory="observableArrayList">
                           <String fx:value="2016" />
@@ -186,7 +190,7 @@
                         </FXCollections>
                       </items>
                     </ComboBox>
-                    <ComboBox fx:id="dayToCmb" layoutX="351.0" layoutY="279.0">
+                    <ComboBox fx:id="dayToCmb" layoutX="271.0" layoutY="282.0">
                       <items>
                         <FXCollections fx:factory="observableArrayList">
                           <String fx:value="1" />
@@ -224,7 +228,7 @@
                         </FXCollections>
                       </items>
                     </ComboBox>
-                    <ComboBox fx:id="monthToCmb" layoutX="446.0" layoutY="279.0">
+                    <ComboBox fx:id="monthToCmb" layoutX="359.0" layoutY="282.0">
                       <items>
                         <FXCollections fx:factory="observableArrayList">
                           <String fx:value="01" />
@@ -242,7 +246,7 @@
                         </FXCollections>
                       </items>
                     </ComboBox>
-                    <ComboBox fx:id="yearToCmb" layoutX="535.0" layoutY="279.0">
+                    <ComboBox fx:id="yearToCmb" layoutX="446.0" layoutY="282.0">
                       <items>
                         <FXCollections fx:factory="observableArrayList">
                           <String fx:value="2016" />
@@ -250,7 +254,8 @@
                         </FXCollections>
                       </items>
                     </ComboBox>
-                    <Button layoutX="18.0" layoutY="480.0" mnemonicParsing="false" onAction="#OnConfirmOrderClick" text="Confirm Order" />
+                    <Button fx:id="ConfirmOrderBtn" layoutX="306.0" layoutY="464.0" mnemonicParsing="false" onAction="#OnConfirmOrderClick" text="Confirm Order" visible="false" />
+                    <Button layoutX="453.0" layoutY="464.0" mnemonicParsing="false" onAction="#OnCancelOrder" text="Cancel Order" />
                   </children>
                 </Pane>
               </children>

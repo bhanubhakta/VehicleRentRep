@@ -144,6 +144,7 @@ public class CustomerDashboardController implements Initializable, ControlledScr
 		OrderPane.setVisible(false);
 		OrderCarBtn.setVisible(false);
 		OrderTruckBtn.setVisible(true);
+		PaymentConfirmPane.setVisible(false);
 		List<Truck> listVehicles = new ArrayList<>();
 		truck = new TruckDS();
 		listVehicles = truck.getTrucksForCustomer();
@@ -167,7 +168,8 @@ public class CustomerDashboardController implements Initializable, ControlledScr
 		TruckPane.setVisible(false);
 		OrderPane.setVisible(false);
 		OrderCarBtn.setVisible(true);
-		OrderTruckBtn.setVisible(false);		
+		OrderTruckBtn.setVisible(false);	
+		PaymentConfirmPane.setVisible(false);
 		List<Car> listVehicles = new ArrayList<>();
 		car = new CarDS();
 		listVehicles = car.getCarsForCustomer();
